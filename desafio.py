@@ -1,19 +1,16 @@
-import textwrap
-
-
-def menu():
+def MENU_BANCO():
     menu = """\n
     ===Menu===
-    [d]\tDepositar
-    [s]\tSacar
-    [e]\tExtrato
-    [nc]\tNova conta
-    [lc]\tListar contas
-    [nu]\tNovo usuário
-    [q]\tSair
+    [DP]]\tDepositar
+    [SC]\tSacar
+    [EX]\tExtrato
+    [NC]\tNova conta
+    [LC]\tListar contas
+    [NU]\tNovo usuário
+    [Q]\tSair
     
     => """
-    return  input(textwrap.dedent(menu));
+    return  input(menu);
 
 def depositar(saldo, valor, extrato):
 
@@ -95,7 +92,7 @@ def listar_contas(contas):
             Titular:\t{conta['usuario']['nome']}
         """
         print("=" * 100)
-        print(textwrap.dedent(linha))
+        print(linha)
 
 def main():
     LIMITE_SAQUE = 3
@@ -109,14 +106,14 @@ def main():
     contas = []
     
     while True:
-        opcao = menu()
+        opcao = MENU_BANCO()
     
-        if opcao == "d":
+        if opcao == "DP":
             valor = float(input("Informe o valor do depósito: "))
         
             saldo, extrato = depositar(saldo, valor, extrato)
         
-        elif opcao == "s":
+        elif opcao == "SC":
             valores = float(input("informe o valor do saque: "))
         
             saldo, extrato = sacar(
@@ -128,20 +125,21 @@ def main():
             limite_saques=LIMITE_SAQUE,
             
             )
-        elif opcao == "e":
+        elif opcao == "EX":
             exibir_extrato(saldo, extrato=extrato)
-        elif opcao == "nu":
+            
+        elif opcao == "NU":
             criar_usuario(usuarios)
-        elif opcao == "nc":
+        elif opcao == "NC":
             numero_conta = len(contas) + 1
             conta = criar_conta(AGENCIA, numero_conta, usuarios)
             if conta:
                 contas.append(conta)
             
-        elif opcao == "lc":
+        elif opcao == "LC":
             listar_contas(contas)
             
-        elif opcao == "q":
+        elif opcao == "Q":
             break
         
         else:
